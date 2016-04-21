@@ -1,0 +1,45 @@
+<!doctype html>
+<!--
+ This page is shown when the extension button is clicked, because the
+ "browser_action" field in manifest.json contains the "default_popup" key with
+ value "popup.html".
+ -->
+<html>
+  <head>
+    <title>Getting Started Extension's Popup</title>
+    <style>
+      body {
+        font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
+        font-size: 80%;
+      }
+      .status {
+        /* avoid an excessively wide status text */
+        white-space: pre;
+        text-overflow: ellipsis;
+        width: 480px;
+      }
+    </style>
+
+    <!--
+      - JavaScript and HTML must be in separate files: see our Content Security
+      - Policy documentation[1] for details and explanation.
+      -
+      - [1]: https://developer.chrome.com/extensions/contentSecurityPolicy
+     -->
+    <script type="text/javascript" src="jquery-2.2.3.min.js"></script>
+    <script type="text/javascript" src="review.js"></script>
+  </head>
+  <body>
+    <div id="status" class="status"></div>
+    <form id="filter-form" action="#">
+        <div class="div-form">
+            Proximity (miles): <input type="text" name="proximity" min="0"><br>
+            Minimum review length (in characters): <input type="text" name="min_review_length"><br>
+            Minimum number of author reviews: <input type="number" name="min_author_reviews" min="0"><br>
+        </div>
+        <input type="submit">
+    </form>
+    <div id="results" class="results"></div>
+  </body>
+</html>
+

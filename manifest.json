@@ -1,0 +1,26 @@
+{
+  "manifest_version": 2,
+
+  "name": "Getting started example",
+  "description": "This extension shows a Google Image search result for the current page",
+  "version": "1.0",
+
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+        "matches": ["https://www.yelp.com/biz/*", "http://www.yelp.com/biz/*"],
+        "js": ["jquery-2.2.3.min.js", "content_script.js"],
+        "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "activeTab",
+    "http://*.localhost/*",
+    "http://192.168.4.106/*",
+    "http://bid001-qa.aws.mgnt.cc/*"
+
+  ]
+}
