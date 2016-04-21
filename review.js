@@ -64,10 +64,12 @@ function constructData(url, filters) {
 function onSuccess(jsonData, status, jqXHR) {
     $( "#status" ).text("Filter again?");
     $( "#results" ).text( "Your true Yelp review score:");
-    var list = $("#results").html('<ul></ul>').find('ul');
+    var list = $("#results").html('<br><table></table>').find('table');
     $.each(jsonData, function(k, v) {
         if (k != "status") {
-            list.append('<li>' + k + ': ' + v + '</li>');
+            clean_k = k.replace('_', ' ');
+            clean_k = clean_k[0].toUpperCase() + clean_k.slice(1);
+            list.append('<tr><td>' + clean_k + ': </td><td>' + v + '</td></tr>');
         }
     });
 }

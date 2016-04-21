@@ -16,7 +16,7 @@
         /* avoid an excessively wide status text */
         white-space: pre;
         text-overflow: ellipsis;
-        width: 480px;
+        width: 400px;
       }
     </style>
 
@@ -30,13 +30,39 @@
     <script type="text/javascript" src="review.js"></script>
   </head>
   <body>
-    <div id="status" class="status">Let's filter some reviews!</div>
+      <div id="status" class="status">Let's filter some reviews!</div><br>
     <form id="filter-form" action="#">
         <div class="div-form">
-            Proximity (miles): <input type="text" name="proximity" min="0"><br>
-            Minimum review length (in characters): <input type="text" name="min_review_length"><br>
-            Minimum number of author reviews: <input type="number" name="min_author_reviews" min="0"><br>
+            <table>
+                <tr>
+                    <td>Proximity:</td>
+                    <td>
+                    <input type="radio" name="max_proximity" id="LOCALITY" value="LOCALITY">
+                    <label for="LOCALITY">City</label><br>
+                    </td>
+                <tr>
+                    <td></td>
+                    <td>
+                    <input type="radio" name="max_proximity" id="REGION" value="REGION">
+                    <label for="REGION">State </label><br>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                    <input type="radio" name="max_proximity" id="EVERYWHERE" value="ANY">
+                    <label for="EVERYWHERE">Everywhere </label><br>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Minimum review length (in characters):<br></td>
+                    <td><input type="text" name="min_review_length" value=0><br></td>
+                <tr>
+                    <td>Minimum number of author reviews:<br></td>
+                    <td><input type="number" name="min_author_reviews" min="0" value=0><br></td>
+                </tr>
+            </table>
         </div>
+        <br>
         <input type="submit">
     </form>
     <div id="results" class="results"></div>
