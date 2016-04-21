@@ -62,23 +62,36 @@ function constructData(url, filters) {
 }
 
 function onSuccess(jsonData, status, jqXHR) {
-    $( "#status" ).text( "Your true Yelp review score:");
+    $( "#status" ).text("Filter again?");
+    $( "#results" ).text( "Your true Yelp review score:");
     var list = $("#results").html('<ul></ul>').find('ul');
     $.each(jsonData, function(k, v) {
-        list.append('<li>' + k + ': ' + v + '</li>');
+        if (k != "status") {
+            list.append('<li>' + k + ': ' + v + '</li>');
+        }
     });
 }
 
+const YELP_TAB_MSG = "This only works on an open Yelp tab!";
 
 $(document).ready(function(){
+    var isYelp = null;
+    getCurrentTabUrl(function(yelpUrl) {
+        isYelp = isYelpBizUrl(yelpUrl);
+        if ( !isYelp ) {
+            $( "#status" ).text(YELP_TAB_MSG);
+            $( "input[type=submit]").prop('disabled', true);
+        } else {
+            $( "input[type=submit]").prop('disabled', false);
+        }
+    });
     $("#filter-form").submit(function (event) {
         event.preventDefault();
         getCurrentTabUrl(function(yelpUrl) {
-            var isYelp = isYelpBizUrl(yelpUrl);
             if ( isYelp ) {
                 $( "#status" ).text( "Analyzing reviews...");
             } else {
-                $( "#status" ).text("This only works on an open Yelp tab!");
+                $( "#status" ).text(YELP_TAB_MSG);
             }
             if (isYelp){
                 filters = $("#filter-form").serializeArray();
@@ -88,6 +101,5 @@ $(document).ready(function(){
             }
         });
     });
-
 });
 
