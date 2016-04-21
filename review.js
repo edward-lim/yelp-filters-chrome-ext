@@ -64,7 +64,7 @@ function constructData(url, filters) {
 function onSuccess(jsonData, status, jqXHR) {
     $( "#status" ).text("Filter again?");
     $( "#results" ).text( "Your true Yelp review score:");
-    var list = $("#results").html('<br><table></table>').find('table');
+    var list = $("#results").html('<br><table width="100%"></table>').find('table');
     $.each(jsonData, function(k, v) {
         if (k != "status") {
             clean_k = k.replace('_', ' ');
