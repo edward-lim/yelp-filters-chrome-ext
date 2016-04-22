@@ -14,18 +14,10 @@
     "48": "yelp-icon-48.png",
     "128": "yelp-icon-128.png"
   },
-  "content_scripts": [
-    {
-        "matches": ["https://www.yelp.com/biz/*", "http://www.yelp.com/biz/*"],
-        "js": ["jquery-2.2.3.min.js", "content_script.js"],
-        "run_at": "document_end"
-    }
-  ],
   "permissions": [
     "activeTab",
     "http://*.localhost/*",
     "http://192.168.4.106/*",
     "http://bid001-qa.aws.mgnt.cc/*"
-
   ]
 }
