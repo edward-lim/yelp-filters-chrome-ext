@@ -6,6 +6,7 @@ app = Flask(__name__)
 @app.route("/", methods=['POST'])
 def review_handler():
     data = request.json
+    print data
     try:
         data = parse_post_body(data)
         response_dict = {

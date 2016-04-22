@@ -7,65 +7,35 @@
 <html>
   <head>
     <title>Getting Started Extension's Popup</title>
-    <style>
-      body {
-        font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
-        font-size: 80%;
-      }
-      .status {
-        /* avoid an excessively wide status text */
-        white-space: pre;
-        width: 400px;
-        font-size: 200%;
-      }
-    </style>
-
-    <!--
-      - JavaScript and HTML must be in separate files: see our Content Security
-      - Policy documentation[1] for details and explanation.
-      -
-      - [1]: https://developer.chrome.com/extensions/contentSecurityPolicy
-     -->
     <script type="text/javascript" src="jquery-2.2.3.min.js"></script>
+    <script type="text/javascript" src="semantic.min.js"></script>
     <script type="text/javascript" src="review.js"></script>
+    <link rel="stylesheet" type="text/css" href="semantic.min.css">
   </head>
-  <body>
-    <div id="status" class="status">Let's filter some reviews!</div><br>
-    <form id="filter-form" action="#">
-        <div class="div-form">
-            <table>
-                <tr>
-                    <td>Proximity:</td>
-                    <td>
-                    <input type="radio" name="max_proximity" id="LOCALITY" value="LOCALITY">
-                    <label for="LOCALITY">City</label><br>
-                    </td>
-                <tr>
-                    <td></td>
-                    <td>
-                    <input type="radio" name="max_proximity" id="REGION" value="REGION">
-                    <label for="REGION">State</label><br>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>
-                    <input type="radio" name="max_proximity" id="EVERYWHERE" value="ANY">
-                    <label for="EVERYWHERE">Everywhere</label><br>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Minimum review length (in characters):<br></td>
-                    <td><input type="text" name="min_review_length" value=0><br></td>
-                <tr>
-                    <td>Minimum number of author reviews:<br></td>
-                    <td><input type="number" name="min_author_reviews" min="0" value=0><br></td>
-                </tr>
-            </table>
+  <body style="margin: 50px;">
+    <h3 id="status" class="ui header">Let's filter some reviews!</h3>
+    <form id="filter-form" class="ui form" action="#">
+        <div class="field">
+            <label>Minimum review length (in characters)</label>
+            <input type="text" name="min_review_length" value=0>
         </div>
-        <br>
-        <input type="submit">
+        <div class="field">
+            <label>Minimum number of author reviews</label>
+            <input type="text" name="min_author_reviews" value=0>
+        </div>
+        <div class="field">
+            <label>Proximity</label>
+            <select class="ui dropdown" name="max_proximity">
+                <option value="ANY">Everywhere</option>
+                <option value="LOCALITY">City</option>
+                <option value="REGION">State</option>
+            </select>
+        </div>
+        <div class="ui red submit button">Submit</div>
     </form>
-    <div id="results" class="results"></div>
+    <div class="ui divider"></div>
+    <div id="results" class="ui horizontal statistics" style="padding-top: 20px;">
+    </div>
   </body>
 </html>
 
