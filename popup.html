@@ -7,39 +7,35 @@
 <html>
   <head>
     <title>Getting Started Extension's Popup</title>
-    <style>
-      body {
-        font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
-        font-size: 80%;
-      }
-      .status {
-        /* avoid an excessively wide status text */
-        white-space: pre;
-        text-overflow: ellipsis;
-        width: 480px;
-      }
-    </style>
-
-    <!--
-      - JavaScript and HTML must be in separate files: see our Content Security
-      - Policy documentation[1] for details and explanation.
-      -
-      - [1]: https://developer.chrome.com/extensions/contentSecurityPolicy
-     -->
     <script type="text/javascript" src="jquery-2.2.3.min.js"></script>
+    <script type="text/javascript" src="semantic.min.js"></script>
     <script type="text/javascript" src="review.js"></script>
+    <link rel="stylesheet" type="text/css" href="semantic.min.css">
   </head>
-  <body>
-    <div id="status" class="status"></div>
-    <form id="filter-form" action="#">
-        <div class="div-form">
-            Proximity (miles): <input type="text" name="proximity" min="0"><br>
-            Minimum review length (in characters): <input type="text" name="min_review_length"><br>
-            Minimum number of author reviews: <input type="number" name="min_author_reviews" min="0"><br>
+  <body style="margin: 50px;">
+    <h3 id="status" class="ui header">Let's filter some reviews!</h3>
+    <form id="filter-form" class="ui form" action="#">
+        <div class="field">
+            <label>Minimum review length (in characters)</label>
+            <input type="text" name="min_review_length" value=0>
         </div>
-        <input type="submit">
+        <div class="field">
+            <label>Minimum number of author reviews</label>
+            <input type="text" name="min_author_reviews" value=0>
+        </div>
+        <div class="field">
+            <label>Proximity</label>
+            <select class="ui dropdown" name="max_proximity">
+                <option value="ANY">Everywhere</option>
+                <option value="LOCALITY">City</option>
+                <option value="REGION">State</option>
+            </select>
+        </div>
+        <div class="ui red submit button">Submit</div>
     </form>
-    <div id="results" class="results"></div>
+    <div class="ui divider"></div>
+    <div id="results" class="ui horizontal statistics" style="padding-top: 20px;">
+    </div>
   </body>
 </html>
 

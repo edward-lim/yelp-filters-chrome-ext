@@ -62,23 +62,42 @@ function constructData(url, filters) {
 }
 
 function onSuccess(jsonData, status, jqXHR) {
-    $( "#status" ).text( "Your true Yelp review score:");
-    var list = $("#results").html('<ul></ul>').find('ul');
+    $( "#status" ).text("Filter again?");
+    var list = $("#results").html('<h2>Your custom review score:</h2>');
     $.each(jsonData, function(k, v) {
-        list.append('<li>' + k + ': ' + v + '</li>');
+        if (k != "status" && k != "message") {
+            clean_k = k.replace('_', ' ');
+            clean_k = clean_k[0].toUpperCase() + clean_k.slice(1);
+            list.append('<div class="statistic"><div class="value">' + v + '</div><div class="label">' + clean_k + '</div></div>');
+        }
     });
 }
 
+const YELP_TAB_MSG = "This only works on a Yelp business!";
 
 $(document).ready(function(){
+    $('select.dropdown').dropdown();
+    $('.form').form();
+
+    var isYelp = null;
+    getCurrentTabUrl(function(yelpUrl) {
+        isYelp = isYelpBizUrl(yelpUrl);
+        if ( !isYelp ) {
+            $( "#status" ).text(YELP_TAB_MSG);
+            $( "input[type=submit]").prop('disabled', true);
+        } else {
+            $( "input[type=submit]").prop('disabled', false);
+        }
+    });
+
     $("#filter-form").submit(function (event) {
         event.preventDefault();
+        console.log("Submitted form");
         getCurrentTabUrl(function(yelpUrl) {
-            var isYelp = isYelpBizUrl(yelpUrl);
             if ( isYelp ) {
                 $( "#status" ).text( "Analyzing reviews...");
             } else {
-                $( "#status" ).text("This only works on an open Yelp tab!");
+                $( "#status" ).text(YELP_TAB_MSG);
             }
             if (isYelp){
                 filters = $("#filter-form").serializeArray();
@@ -88,6 +107,5 @@ $(document).ready(function(){
             }
         });
     });
-
 });
 
